@@ -12,10 +12,43 @@
   --title-color: #DB00FF;
   --accent-color: #FF0070;
   --secondary-accent-color: #FF0070;
+  --hover-color: #FF007066;
   --text-color: #F1B2CE;
   --accent-text-color: #000028;
   --cover-image: url('/images/cover-image-dark.png');
   --background-color: #000028;
+}
+
+.theme-dark .rec-indicator {
+  display: block;
+}
+
+.rec-indicator {
+  position: absolute;
+  top: 10px;
+  right: 19px;
+  font-family: var(--font-family);
+  font-size: 18px;
+  color: var(--accent-color);
+  line-height: 25px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+
+.rec-indicator::before {
+  content: "REC";
+}
+
+.rec-indicator::after {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  margin-left: 10px;
+  vertical-align: middle;
+  box-shadow: 0px 0px 4px 2px var(--accent-color);
 }
 
 .theme-dark .page {
