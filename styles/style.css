@@ -50,8 +50,6 @@
 .header {
   display: grid;
   grid-template-rows: repeat(3, 1fr);
-  padding-inline: 10px;
-  padding-block: 10px; 
   margin-block-end: 40px;
   height: 100vh;
   background-image: var(--cover-image);
@@ -60,8 +58,37 @@
   background-attachment: fixed;
 }
 
+.rec-indicator {
+  position: absolute;
+  top: 10px;
+  right: 19px;
+  font-family: var(--font-family);
+  font-size: 18px;
+  color: var(--accent-color);
+  line-height: 25px;
+  text-align: center;
+}
+
+.rec-indicator::before {
+  content: "REC";
+}
+
+.rec-indicator::after {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background-color: var(--accent-color);
+  border-radius: 50%;
+  margin-left: 10px;
+  vertical-align: middle;
+  box-shadow: 0px 0px 4px 2px var(--accent-color);
+}
+
 .decorated-zone {
   position: relative;
+  padding-inline: 10px;
+  padding-block: 10px;
 }
 
 /* правый верхний уголок */
@@ -90,9 +117,14 @@
 
 .header__theme-menu {
   grid-row: 1;
-  display: flex;  
-  align-items: center;
-  justify-content: flex-end;
+  align-self: center;
+  justify-self: end;
+}
+
+.header__theme-menu-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3,auto);
 }
 
 .header__theme-menu-button {
@@ -102,17 +134,17 @@
   background: transparent;
   text-transform: lowercase;
   border: 0px solid;
-  margin-block: 5px;
+  margin-block-end: 10px;
   min-width: 70px;
 }
 
-.header__theme-menu-button_active {
-  border: 1px solid var(--secondary-accent-color);
-  pointer-events: none;
+.header__theme-menu-button:hover{
+  outline: 1px solid var(--hover-color);
 }
 
-.header__theme-menu-button:hover{
-  border: 1px solid var(--hover-color);
+.header__theme-menu-button_active {
+  outline: 1px solid var(--secondary-accent-color);
+  pointer-events: none;
 }
 
 .header__theme-menu-button:focus-visible{
@@ -140,15 +172,15 @@
   /* сохраните в разметке и стилях класс page у тега body. Он удобен, чтобы составлять селекторы для разных цветовых тем. */
   background-color: var(--background-color);
   box-sizing: border-box;
-  min-width: 100vw;
 }
 
 .page__content {
   padding-inline: 10px;
 }
 
-.page__content-reasons, .page__content-factors, .page__content-tips{
+.page__content__item{
   display: grid;
+  margin-block-end: 30px;
 }
 
 .article{
@@ -157,30 +189,24 @@
   margin-block-end: 20px;
 }
 
-.page__content-reasons{
-
-}
-
-.page__content-factors{
-
-}
-
-.page__content-tips{
-  
+.tips .h3{
+  margin-block-end: 10px;
 }
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill);
+  grid-auto-flow: dense;
   gap: 10px;
   margin-block-start: 10px;
   margin-block-end: 40px;
 }
 
-.gallery img {
-  width: 100%;
-  height: auto;
+.gallery__image {
+  inline-size: 100%;
+  block-size: 100%;
+  max-block-size: 100%;
   display: block;
+  object-fit: cover;
 }
 
 .footer {
@@ -188,4 +214,121 @@
   display: flex;
   justify-content: center;
   align-items: center; 
+}
+
+.footer .text{
+  text-shadow: 2px 2px 0 var(--accent-color);
+}
+
+@media (min-width: 768px) {
+  .decorated-zone {
+    position: relative;
+    padding-inline: 20px;
+    padding-block: 20px;
+  }
+
+  .decorated-zone::before {
+    top: 20px;
+    right: 20px;
+  }
+
+  .decorated-zone::after {
+    bottom: 20px;
+    left: 20px;
+  }
+
+  .rec-indicator {
+    top: 20px;
+    right: 29px;
+  }
+
+  .header {
+    margin-block-end: 60px;
+  }
+
+  .header .h1 {
+    transform: translateX(-20px);
+    font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem) 
+  }
+
+  .header .h3 {
+    width: 50%;
+  }
+
+  .page__content {
+    padding-inline: 20px;
+  }
+
+  .page__content__item{
+    margin-block-end: 60px;
+  }
+
+  .reasons {
+    grid-template-columns: 1fr 2fr;
+    column-gap: 20px;
+  }
+
+  .reasons .h2{
+    grid-row: 1/-1;
+    grid-column: 1/1;
+  }
+
+  .reasons .article{
+    grid-column: 2/2;
+  }
+
+  .tips {
+    grid-template-columns: 1fr 2fr;
+    column-gap: 20px;
+  }
+
+  .tips .h2{
+    grid-row: 1/-1;
+    grid-column: 1;
+  }
+
+  .tips .article{
+    grid-column: 2;
+  }
+
+  .gallery {
+    margin-block-start: 20px;
+    gap: 20px;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,auto);
+  }
+
+  .gallery__image:first-child{
+    grid-column: 1/3;
+    grid-row: 1;
+  }
+
+  .gallery__image:nth-child(2){
+    grid-column: 3;
+    grid-row: 1/3;
+  }
+
+  .gallery__image:nth-child(3){
+    grid-column: 1;
+    grid-row: 2/-1;
+  }
+
+  .gallery__image:last-child{
+    grid-column: 2/-1;
+    grid-row: 3;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header__theme-menu {
+    align-self: start;
+    justify-self: center;
+}
+  .header__theme-menu-list {
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(3,auto);
+  }
+  .header__theme-menu-button{
+    margin-inline: 5px;
+  }
 }
