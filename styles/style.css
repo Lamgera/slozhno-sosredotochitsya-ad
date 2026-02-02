@@ -183,7 +183,7 @@
   margin-block-end: 30px;
 }
 
-.article {
+.section {
   display: grid;
   gap: 10px;
   margin-block-end: 20px;
@@ -273,7 +273,7 @@
     grid-column: 1/1;
   }
 
-  .reasons .article {
+  .reasons .section {
     grid-column: 2/2;
   }
 
@@ -287,7 +287,7 @@
     grid-column: 1;
   }
 
-  .tips .article {
+  .tips .section {
     grid-column: 2;
   }
 
